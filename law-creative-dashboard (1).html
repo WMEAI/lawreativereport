@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAW Creative | Social Selling Campaign Report</title>
+<link rel="stylesheet" href="https://use.typekit.net/nka8qzy.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080b14;--surface:#0f1420;--surface-2:#151c2c;--surface-3:#1c2538;
+  --border:#1a2235;--border-light:#2a3550;
+  --text:#e2e8f0;--text-muted:#8c99b0;--text-faint:#5a6680;
+  --accent:#4D6CFA;--accent-glow:rgba(77,108,250,.12);
+  --teal:#1AFFD5;--teal-glow:rgba(26,255,213,.08);
+  --lime:#BCFF44;--green:#1AFFD5;
+  --amber:#fdcc0e;--amber-glow:rgba(253,204,14,.08);
+  --red:#ef4444;--purple:#9C6AFC;--purple-glow:rgba(156,106,252,.08);
+  --brett:#4D6CFA;--alan:#fdcc0e;--josh:#1AFFD5;--morten:#9C6AFC;
+  --radius:12px;--radius-sm:8px;--radius-xs:6px;
+}
+html{font-size:15px;scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#080b14 0%,#0e1525 50%,#080b14 100%);border-bottom:1px solid var(--border);padding:1.5rem 0;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(77,108,250,.3),rgba(26,255,213,.2),transparent)}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.header-brand{display:flex;align-items:center;gap:1rem}
+.header-logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6B8AFF);display:flex;align-items:center;justify-content:center;font-family:'benton-modern-display',Georgia,serif;font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:-0.02em}
+.header-title{font-family:'benton-modern-display',Georgia,serif;font-size:1.35rem;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.header-subtitle{font-size:.75rem;color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;margin-top:2px}
+.header-date{font-size:.8rem;color:var(--text-muted);text-align:right}
+.header-date strong{color:var(--teal);display:block;font-size:.85rem}
+
+/* TABS */
+.tabs{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.tabs-inner{max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;gap:0;overflow-x:auto}
+.tab{padding:.85rem 1.25rem;font-size:.82rem;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;letter-spacing:.01em}
+.tab:hover{color:var(--text);background:rgba(255,255,255,.02)}
+.tab.active{color:var(--text);border-bottom-color:var(--accent)}
+.tab[data-tab="brett"].active{border-bottom-color:var(--brett)}
+.tab[data-tab="alan"].active{border-bottom-color:var(--alan)}
+.tab[data-tab="josh"].active{border-bottom-color:var(--josh)}
+.tab[data-tab="morten"].active{border-bottom-color:var(--morten)}
+.tab[data-tab="network"].active{border-bottom-color:var(--teal)}
+
+/* MAIN */
+.main{max-width:1280px;margin:0 auto;padding:2rem}
+.panel{display:none}
+.panel.active{display:block}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.card-title{font-family:'benton-modern-display',Georgia,serif;font-size:1.1rem;font-weight:600;letter-spacing:-0.01em}
+.card-badge{font-size:.7rem;font-weight:600;padding:.25rem .65rem;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+
+/* STAT GRIDS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.15rem;text-align:center;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stat-card.blue::before{background:var(--accent)}
+.stat-card.teal::before{background:var(--teal)}
+.stat-card.amber::before{background:var(--amber)}
+.stat-card.purple::before{background:var(--purple)}
+.stat-card.green::before{background:var(--green)}
+.stat-value{font-family:'benton-modern-display',Georgia,serif;font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;line-height:1.1}
+.stat-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-top:.35rem}
+.stat-delta{font-size:.7rem;margin-top:.3rem;font-weight:600}
+.stat-delta.up{color:var(--teal)}
+.stat-delta.down{color:var(--red)}
+
+/* PROFILE BANNER */
+.profile-banner{display:flex;align-items:center;gap:1.5rem;padding:1.5rem;border-radius:var(--radius);margin-bottom:1.5rem;position:relative;overflow:hidden}
+.profile-banner::before{content:'';position:absolute;inset:0;opacity:.08;border-radius:var(--radius)}
+.profile-banner.brett{background:linear-gradient(135deg,rgba(77,108,250,.1),rgba(77,108,250,.03));border:1px solid rgba(77,108,250,.15)}
+.profile-banner.brett::before{background:var(--brett)}
+.profile-banner.alan{background:linear-gradient(135deg,rgba(253,204,14,.1),rgba(253,204,14,.03));border:1px solid rgba(253,204,14,.15)}
+.profile-banner.alan::before{background:var(--alan)}
+.profile-banner.josh{background:linear-gradient(135deg,rgba(26,255,213,.1),rgba(26,255,213,.03));border:1px solid rgba(26,255,213,.15)}
+.profile-banner.josh::before{background:var(--josh)}
+.profile-banner.morten{background:linear-gradient(135deg,rgba(156,106,252,.1),rgba(156,106,252,.03));border:1px solid rgba(156,106,252,.15)}
+.profile-banner.morten::before{background:var(--morten)}
+.profile-avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.3rem;color:#fff;flex-shrink:0;position:relative;z-index:1}
+.profile-avatar.brett{background:var(--brett)}
+.profile-avatar.alan{background:var(--alan);color:#080b14}
+.profile-avatar.josh{background:var(--josh);color:#080b14}
+.profile-avatar.morten{background:var(--morten)}
+.profile-info{position:relative;z-index:1}
+.profile-name{font-family:'benton-modern-display',Georgia,serif;font-size:1.3rem;font-weight:600}
+.profile-role{font-size:.82rem;color:var(--text-muted)}
+.profile-stats{display:flex;gap:2rem;margin-left:auto;position:relative;z-index:1}
+.profile-stat{text-align:center}
+.profile-stat-value{font-family:'benton-modern-display',Georgia,serif;font-size:1.4rem;font-weight:700}
+.profile-stat-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em}
+
+/* TABLES */
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.65rem .75rem;color:var(--text-muted);font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--border);background:var(--surface-2)}
+.data-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border)}
+.data-table tr:hover td{background:rgba(255,255,255,.015)}
+.data-table .highlight{color:var(--teal);font-weight:600}
+.data-table .company-tag{display:inline-block;padding:.15rem .5rem;background:rgba(77,108,250,.1);color:var(--accent);border-radius:4px;font-size:.72rem;font-weight:500}
+.data-table .seniority-tag{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.68rem;font-weight:600}
+.seniority-tag.vp{background:rgba(26,255,213,.12);color:var(--teal)}
+.seniority-tag.director{background:rgba(77,108,250,.12);color:var(--accent)}
+.seniority-tag.senior{background:rgba(156,106,252,.12);color:var(--purple)}
+.seniority-tag.manager{background:rgba(253,204,14,.12);color:var(--amber)}
+.seniority-tag.mid{background:rgba(140,153,176,.12);color:var(--text-muted)}
+.seniority-tag.junior{background:rgba(140,153,176,.08);color:var(--text-faint)}
+
+/* COMPANY MAP */
+.company-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.75rem}
+.company-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;display:flex;align-items:center;gap:.85rem;transition:border-color .2s}
+.company-card:hover{border-color:var(--border-light)}
+.company-icon{width:40px;height:40px;border-radius:8px;background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:var(--accent);flex-shrink:0}
+.company-name{font-weight:600;font-size:.85rem}
+.company-detail{font-size:.72rem;color:var(--text-muted)}
+.company-profiles{display:flex;gap:4px;margin-top:4px}
+.company-profiles .dot{width:8px;height:8px;border-radius:50%;opacity:.7}
+
+/* SECTION TITLES */
+.section-title{font-family:'benton-modern-display',Georgia,serif;font-size:1.2rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.section-title .icon{font-size:1rem;opacity:.6}
+.section-subtitle{font-size:.78rem;color:var(--text-muted);margin-bottom:1.25rem;max-width:680px;line-height:1.5}
+
+/* CHART CONTAINERS */
+.chart-container{position:relative;height:260px;margin:1rem 0}
+.chart-container.small{height:200px}
+
+/* GRID LAYOUTS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* ENGAGEMENT SIGNAL */
+.signal-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.85rem 1rem;display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem}
+.signal-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.signal-dot.hot{background:var(--teal);box-shadow:0 0 8px rgba(26,255,213,.3)}
+.signal-dot.warm{background:var(--amber);box-shadow:0 0 8px rgba(253,204,14,.2)}
+.signal-name{font-weight:600;font-size:.85rem}
+.signal-detail{font-size:.72rem;color:var(--text-muted)}
+
+/* OVERVIEW CARDS */
+.overview-profiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+@media(max-width:900px){.overview-profiles{grid-template-columns:repeat(2,1fr)}}
+.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.ov-card:hover{border-color:var(--border-light);transform:translateY(-2px)}
+.ov-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.ov-card.brett::before{background:var(--brett)}
+.ov-card.alan::before{background:var(--alan)}
+.ov-card.josh::before{background:var(--josh)}
+.ov-card.morten::before{background:var(--morten)}
+.ov-card .name{font-family:'benton-modern-display',Georgia,serif;font-weight:600;margin-bottom:.15rem}
+.ov-card .archetype{font-size:.72rem;color:var(--text-muted);margin-bottom:.85rem}
+.ov-card .ov-stats{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.ov-card .ov-stat-val{font-family:'benton-modern-display',Georgia,serif;font-size:1.1rem;font-weight:700}
+.ov-card .ov-stat-lbl{font-size:.62rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.03em}
+
+/* NETWORK TAB */
+.network-hero{text-align:center;padding:2rem 0 1.5rem}
+.network-hero h2{font-family:'benton-modern-display',Georgia,serif;font-size:2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:.5rem}
+.network-hero p{color:var(--text-muted);max-width:600px;margin:0 auto;font-size:.9rem}
+
+/* PROGRESS BAR */
+.progress-bar{height:6px;background:var(--surface-3);border-radius:3px;overflow:hidden;margin-top:.5rem}
+.progress-fill{height:100%;border-radius:3px;transition:width .6s ease}
+
+/* FOOTER */
+.footer{text-align:center;padding:2.5rem 2rem;color:var(--text-faint);font-size:.72rem;border-top:1px solid var(--border);margin-top:2rem}
+.footer a{color:var(--text-muted);text-decoration:none}
+.footer .brand{font-family:'benton-modern-display',Georgia,serif;font-size:.85rem;color:var(--text-muted);margin-bottom:.35rem}
+
+/* CONTENT QUEUE */
+.queue-item{display:flex;align-items:center;gap:.85rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.queue-item:last-child{border-bottom:none}
+.queue-num{width:28px;height:28px;border-radius:6px;background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--text-muted);flex-shrink:0}
+.queue-num.live{background:rgba(26,255,213,.12);color:var(--teal)}
+.queue-title{font-weight:600;font-size:.85rem}
+.queue-pov{font-size:.7rem;color:var(--text-muted)}
+.queue-status{margin-left:auto;font-size:.68rem;font-weight:600;padding:.2rem .5rem;border-radius:4px}
+.queue-status.published{background:rgba(26,255,213,.1);color:var(--teal)}
+.queue-status.scheduled{background:rgba(253,204,14,.1);color:var(--amber)}
+.queue-status.draft{background:rgba(140,153,176,.1);color:var(--text-muted)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .4s ease both}
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+
+/* DONUT LABEL */
+.donut-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.donut-center{position:absolute;text-align:center}
+.donut-center .big{font-family:'benton-modern-display',Georgia,serif;font-size:1.6rem;font-weight:700}
+.donut-center .small{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.03em}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo">LAW</div>
+      <div>
+        <div class="header-title">Social Selling Campaign</div>
+        <div class="header-subtitle">LinkedIn Thought Leadership Programme</div>
+      </div>
+    </div>
+    <div class="header-date">
+      <strong>Campaign Report</strong>
+      1 June 2026 | Prepared by WeMarket.Events
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tabs-inner">
+    <div class="tab active" data-tab="overview">Overview</div>
+    <div class="tab" data-tab="network">Network Intelligence</div>
+    <div class="tab" data-tab="brett">Brett Sammels</div>
+    <div class="tab" data-tab="alan">Alan McCulloch</div>
+    <div class="tab" data-tab="josh">Josh Kichenside</div>
+    <div class="tab" data-tab="morten">Morten Kornerup</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ========================== OVERVIEW ========================== -->
+<div class="panel active" id="p-overview">
+  <div class="stats-row fade-up">
+    <div class="stat-card blue"><div class="stat-value">36,111</div><div class="stat-label">Total Impressions</div><div class="stat-delta up">+13% in 13 days</div></div>
+    <div class="stat-card teal"><div class="stat-value">945</div><div class="stat-label">Total Engagements</div><div class="stat-delta up">2.62% avg rate</div></div>
+    <div class="stat-card amber"><div class="stat-value">42+</div><div class="stat-label">Posts Published</div><div class="stat-delta up">All 4 profiles active</div></div>
+    <div class="stat-card purple"><div class="stat-value">333</div><div class="stat-label">New Followers</div><div class="stat-delta up">+333 since launch</div></div>
+    <div class="stat-card green"><div class="stat-value">68+</div><div class="stat-label">New Connections</div><div class="stat-delta up">Decision-maker heavy</div></div>
+  </div>
+
+  <div class="card fade-up delay-1" style="border-left:3px solid var(--teal);background:linear-gradient(135deg,rgba(26,255,213,.04),transparent)">
+    <div class="card-header">
+      <div class="card-title">What Changed This Week</div>
+      <div class="card-badge" style="background:rgba(26,255,213,.1);color:var(--teal)">13 Days · May 19 → Jun 1</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem">
+      <div style="padding:.85rem;background:var(--surface-2);border-radius:8px;border-left:2px solid var(--alan)">
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.3rem">🔥 Alan's Byron Sharp post hits 1,466 impressions</div>
+        <div style="font-size:.78rem;color:var(--text-muted);line-height:1.5">Alan's May 27 Byron Sharp post is now his highest-reach post ever, overtaking "Grading Their Own Homework" (1,364). Total impressions jumped 29% from 6,523 to 8,392. Unique members up 42% to 3,704. Followers +49 (was +25). The audience is responding to research-backed provocation — exactly what the Strategic Provocateur was designed for. ESET still at 2%, LAW B2B at 2%.</div>
+      </div>
+      <div style="padding:.85rem;background:var(--surface-2);border-radius:8px;border-left:2px solid var(--morten)">
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.3rem">🚀 Morten hits 3.07% rate — highest on campaign</div>
+        <div style="font-size:.78rem;color:var(--text-muted);line-height:1.5">11,882 impressions, 365 engagements, 3.07% rate (was 2.75%). His May 28 sustainability conference post debuted with 47 engagements at 8.09% rate — the highest single-post engagement rate on the entire campaign. His May 27 ABM post adds another 20 engagements. Morten is now over 3x the B2B benchmark consistently. Atlas Copco, Novonesis, Siemens all sustained.</div>
+      </div>
+      <div style="padding:.85rem;background:var(--surface-2);border-radius:8px;border-left:2px solid var(--brett)">
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.3rem">📈 Brett's network explodes — OEM cluster forming</div>
+        <div style="font-size:.78rem;color:var(--text-muted);line-height:1.5">11,262 impressions (+6%), 232 engagements, sustained at 2.06%. But the real story is his connections: Mercedes-Benz (Marketing & CRM Manager), Harley-Davidson (Marketing Director EMEA), Audi (UK Marketing Leader), Jaguar Land Rover x2 (Cost Mgmt + AI Ethics), Porsche Retail (Head of Marketing), Volvo Construction (Global VP Purchasing), Unilever (Global Brand VP), Atlas Copco UK (General Manager). The OEM cluster is now unmistakable.</div>
+      </div>
+      <div style="padding:.85rem;background:var(--surface-2);border-radius:8px;border-left:2px solid var(--josh)">
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.3rem">📊 Josh sustains momentum — ABB and Premier Inn hold</div>
+        <div style="font-size:.78rem;color:var(--text-muted);line-height:1.5">4,575 impressions (+7%), 123 engagements, 2.69% rate (up from 2.59%). Two new posts (May 26 + Jun 1). ZF 3%, Gates 2%, IHG 2% all sustained. ABB, Premier Inn, Nuffield Health, Whitbread all still present. Josh's audience is now the most commercially diverse on the team — automotive, hospitality, healthcare, and industrial all represented. +69 followers since launch.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title fade-up delay-1">Profile Performance</div>
+  <div class="overview-profiles fade-up delay-2">
+    <div class="ov-card brett" onclick="switchTab('brett')">
+      <div class="name">Brett Sammels</div>
+      <div class="archetype">The Outcome Engineer</div>
+      <div class="ov-stats">
+        <div><div class="ov-stat-val">11,262</div><div class="ov-stat-lbl">Impressions</div></div>
+        <div><div class="ov-stat-val">232</div><div class="ov-stat-lbl">Engagements</div></div>
+        <div><div class="ov-stat-val">+121</div><div class="ov-stat-lbl">Followers</div></div>
+        <div><div class="ov-stat-val">2.06%</div><div class="ov-stat-lbl">Eng Rate</div></div>
+      </div>
+    </div>
+    <div class="ov-card alan" onclick="switchTab('alan')">
+      <div class="name">Alan McCulloch</div>
+      <div class="archetype">The Strategic Provocateur</div>
+      <div class="ov-stats">
+        <div><div class="ov-stat-val">8,392</div><div class="ov-stat-lbl">Impressions</div></div>
+        <div><div class="ov-stat-val">225</div><div class="ov-stat-lbl">Engagements</div></div>
+        <div><div class="ov-stat-val">+49</div><div class="ov-stat-lbl">Followers</div></div>
+        <div><div class="ov-stat-val">2.68%</div><div class="ov-stat-lbl">Eng Rate</div></div>
+      </div>
+    </div>
+    <div class="ov-card josh" onclick="switchTab('josh')">
+      <div class="name">Josh Kichenside</div>
+      <div class="archetype">The Brand Advocate</div>
+      <div class="ov-stats">
+        <div><div class="ov-stat-val">4,575</div><div class="ov-stat-lbl">Impressions</div></div>
+        <div><div class="ov-stat-val">123</div><div class="ov-stat-lbl">Engagements</div></div>
+        <div><div class="ov-stat-val">+69</div><div class="ov-stat-lbl">Followers</div></div>
+        <div><div class="ov-stat-val">2.69%</div><div class="ov-stat-lbl">Eng Rate</div></div>
+      </div>
+    </div>
+    <div class="ov-card morten" onclick="switchTab('morten')">
+      <div class="name">Morten Kornerup</div>
+      <div class="archetype">The Commercial Realist</div>
+      <div class="ov-stats">
+        <div><div class="ov-stat-val">11,882</div><div class="ov-stat-lbl">Impressions</div></div>
+        <div><div class="ov-stat-val">365</div><div class="ov-stat-lbl">Engagements</div></div>
+        <div><div class="ov-stat-val">+94</div><div class="ov-stat-lbl">Followers</div></div>
+        <div><div class="ov-stat-val">3.07%</div><div class="ov-stat-lbl">Eng Rate</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2 fade-up delay-3">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:1rem">Engagement Rate vs B2B Benchmark</div>
+      <div class="chart-container small"><canvas id="benchmarkChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:1rem">Impressions by Profile</div>
+      <div class="chart-container small"><canvas id="impressionsChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card fade-up delay-4">
+    <div class="card-header">
+      <div class="card-title">Post Performance Leaderboard</div>
+      <div class="card-badge" style="background:rgba(26,255,213,.1);color:var(--teal)">Top 10</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Rank</th><th>Post</th><th>Profile</th><th>Impressions</th><th>Engagements</th><th>Eng Rate</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Personal Story (Apr 19)</td><td><span style="color:var(--morten)">Morten</span></td><td>3,419</td><td>59</td><td>1.73%</td></tr>
+        <tr><td>2</td><td>The Waste Problem (Apr 6)</td><td><span style="color:var(--morten)">Morten</span></td><td>1,717</td><td>52</td><td class="highlight">3.03%</td></tr>
+        <tr><td>3</td><td>Grading Their Own Homework (Mar 17)</td><td><span style="color:var(--alan)">Alan</span></td><td>1,364</td><td>51</td><td class="highlight">3.74%</td></tr>
+        <tr><td>4</td><td>Sustainability Conference (May 28)</td><td><span style="color:var(--morten)">Morten</span></td><td>581</td><td>47</td><td class="highlight">8.09%</td></tr>
+        <tr><td>5</td><td>The Question Your Board Is Already Asking</td><td><span style="color:var(--brett)">Brett</span></td><td>2,872</td><td>40</td><td>1.39%</td></tr>
+        <tr><td>6</td><td>Waste Problem Follow-up (Apr 9)</td><td><span style="color:var(--morten)">Morten</span></td><td>884</td><td>34</td><td class="highlight">3.85%</td></tr>
+        <tr><td>7</td><td>The Accountability Test (Mar 20)</td><td><span style="color:var(--brett)">Brett</span></td><td>2,596</td><td>31</td><td>1.19%</td></tr>
+        <tr><td>8</td><td>Brand AND Growth. Not Brand OR Growth.</td><td><span style="color:var(--josh)">Josh</span></td><td>983</td><td>30</td><td class="highlight">3.05%</td></tr>
+        <tr><td>9</td><td>Custom Personal Story (Mar 30)</td><td><span style="color:var(--josh)">Josh</span></td><td>591</td><td>30</td><td class="highlight">5.08%</td></tr>
+        <tr><td>10</td><td>Byron Sharp Post (May 27)</td><td><span style="color:var(--alan)">Alan</span></td><td>1,466</td><td>27</td><td>1.84%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ========================== NETWORK INTELLIGENCE ========================== -->
+<div class="panel" id="p-network">
+  <div class="network-hero fade-up">
+    <h2>Network Intelligence</h2>
+    <p>Cross-profile analysis of new connections, company penetration, and engagement signals since campaign launch on 16 March 2026.</p>
+  </div>
+
+  <div class="stats-row fade-up delay-1">
+    <div class="stat-card teal"><div class="stat-value">333+</div><div class="stat-label">New Connections & Followers</div><div class="stat-delta up">Across all profiles</div></div>
+    <div class="stat-card blue"><div class="stat-value">110+</div><div class="stat-label">Unique Named Companies</div><div class="stat-delta up">In demographics</div></div>
+    <div class="stat-card amber"><div class="stat-value">63.7%</div><div class="stat-label">Decision Makers</div><div class="stat-delta up">Senior / Dir / VP / CXO</div></div>
+    <div class="stat-card purple"><div class="stat-value">24</div><div class="stat-label">Multi-Profile Companies</div><div class="stat-delta up">Connected to 2+ profiles</div></div>
+  </div>
+
+  <!-- COMPANY PENETRATION MAP -->
+  <div class="card fade-up delay-2">
+    <div class="card-header">
+      <div class="card-title">Company Penetration Map</div>
+      <div class="card-badge" style="background:rgba(77,108,250,.1);color:var(--accent)">Cross-Profile</div>
+    </div>
+    <p class="section-subtitle">Companies appearing across LAW Creative profiles' new connections and post engagement. Companies connected to multiple profiles are surrounding the account from multiple angles.</p>
+    <table class="data-table">
+      <thead><tr><th>Company</th><th>Connections</th><th>Profiles Connected</th><th>Sector</th><th>Signal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ZF Group</strong></td><td>3</td><td><span style="color:var(--brett)">Brett</span> <span style="color:var(--josh)">Josh</span> <span style="color:var(--alan)">Alan</span></td><td>Automotive</td><td><span class="seniority-tag vp">Target Account</span></td></tr>
+        <tr><td><strong>Gates Corporation</strong></td><td>2</td><td><span style="color:var(--brett)">Brett</span> <span style="color:var(--josh)">Josh</span></td><td>Automotive / Industrial</td><td><span class="seniority-tag vp">Target Account</span></td></tr>
+        <tr><td><strong>McKinsey & Company</strong></td><td>1</td><td><span style="color:var(--alan)">Alan</span></td><td>Consulting</td><td><span class="seniority-tag director">Director Level</span></td></tr>
+        <tr><td><strong>Meta</strong></td><td>1</td><td><span style="color:var(--alan)">Alan</span></td><td>Tech / Automotive CPG</td><td><span class="seniority-tag manager">Automotive Vertical</span></td></tr>
+        <tr><td><strong>Hearst UK</strong></td><td>1</td><td><span style="color:var(--alan)">Alan</span></td><td>Media / Automotive</td><td><span class="seniority-tag director">Director Level</span></td></tr>
+        <tr><td><strong>Automotive World</strong></td><td>1</td><td><span style="color:var(--alan)">Alan</span></td><td>Automotive Media</td><td><span class="seniority-tag senior">Industry Press</span></td></tr>
+        <tr><td><strong>Steer Automotive Group</strong></td><td>1</td><td><span style="color:var(--alan)">Alan</span></td><td>Automotive</td><td><span class="seniority-tag mid">Recruitment</span></td></tr>
+        <tr><td><strong>The Access Group (HSC)</strong></td><td>1</td><td><span style="color:var(--alan)">Alan</span></td><td>Technology</td><td><span class="seniority-tag manager">Marketing</span></td></tr>
+        <tr><td><strong>Stellantis</strong></td><td>1</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag vp">Target Vertical</span></td></tr>
+        <tr><td><strong>Ford Pro</strong></td><td>1</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag vp">Target Vertical</span></td></tr>
+        <tr><td><strong>Hella</strong></td><td>1</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive T1</td><td><span class="seniority-tag senior">Aftermarket</span></td></tr>
+        <tr><td><strong>Bridgestone</strong></td><td>1</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive T1</td><td><span class="seniority-tag senior">Aftermarket</span></td></tr>
+        <tr><td><strong>Frasle Mobility</strong></td><td>1</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive T1</td><td><span class="seniority-tag senior">Aftermarket</span></td></tr>
+        <tr><td><strong>IHG Hotels & Resorts</strong></td><td class="highlight">1.52%</td><td><span style="color:var(--josh)">Josh</span></td><td>Hospitality</td><td><span class="seniority-tag vp">Major New Account</span></td></tr>
+        <tr><td><strong>ESET</strong></td><td class="highlight">2.00%</td><td><span style="color:var(--alan)">Alan</span></td><td>Cybersecurity</td><td><span class="seniority-tag vp">Top New Account</span></td></tr>
+        <tr><td><strong>ESET UK</strong></td><td>1.00%</td><td><span style="color:var(--alan)">Alan</span></td><td>Cybersecurity</td><td><span class="seniority-tag director">Same Group</span></td></tr>
+        <tr><td><strong>Deloitte Digital</strong></td><td>&lt;1%</td><td><span style="color:var(--alan)">Alan</span></td><td>Consulting / Digital</td><td><span class="seniority-tag vp">Tier-1 Validation</span></td></tr>
+        <tr><td><strong>Whitbread</strong></td><td>&lt;1%</td><td><span style="color:var(--brett)">Brett</span></td><td>Hospitality</td><td><span class="seniority-tag senior">Cross-Vertical</span></td></tr>
+        <tr><td><strong>Atlas Copco</strong></td><td>&lt;1%</td><td><span style="color:var(--morten)">Morten</span></td><td>Industrial Mfg</td><td><span class="seniority-tag director">Nordic Target</span></td></tr>
+        <tr><td><strong>Novonesis</strong></td><td>&lt;1%</td><td><span style="color:var(--morten)">Morten</span></td><td>Biosolutions</td><td><span class="seniority-tag vp">Existing Client</span></td></tr>
+        <tr><td><strong>Siemens</strong></td><td>&lt;1%</td><td><span style="color:var(--morten)">Morten</span></td><td>Industrial / Tech</td><td><span class="seniority-tag director">Nordic Target</span></td></tr>
+        <tr><td><strong>Novo Nordisk</strong></td><td>&lt;1%</td><td><span style="color:var(--morten)">Morten</span></td><td>Pharma / Life Sciences</td><td><span class="seniority-tag vp">New Nordic Account</span></td></tr>
+        <tr><td><strong>GRUNDFOS</strong></td><td>&lt;1%</td><td><span style="color:var(--morten)">Morten</span></td><td>Industrial Pumps</td><td><span class="seniority-tag director">New Nordic Account</span></td></tr>
+        <tr><td><strong>Sage</strong></td><td>&lt;1%</td><td><span style="color:var(--morten)">Morten</span></td><td>Technology / SaaS</td><td><span class="seniority-tag senior">Enterprise Tech</span></td></tr>
+        <tr><td><strong>Lenovo</strong></td><td>&lt;1%</td><td><span style="color:var(--morten)">Morten</span></td><td>Technology</td><td><span class="seniority-tag senior">Enterprise Tech</span></td></tr>
+        <tr><td><strong>Enterprise Mobility</strong></td><td>&lt;1%</td><td><span style="color:var(--brett)">Brett</span> <span style="color:var(--josh)">Josh</span></td><td>Automotive Fleet</td><td><span class="seniority-tag senior">Cross-Vertical</span></td></tr>
+        <tr><td><strong>ABB</strong></td><td>&lt;1%</td><td><span style="color:var(--josh)">Josh</span></td><td>Industrial / Energy</td><td><span class="seniority-tag vp">New - Morten Pipeline Opp</span></td></tr>
+        <tr><td><strong>Premier Inn</strong></td><td>&lt;1%</td><td><span style="color:var(--josh)">Josh</span></td><td>Hospitality</td><td><span class="seniority-tag vp">New - Morten Pipeline Opp</span></td></tr>
+        <tr><td><strong>Nuffield Health</strong></td><td>&lt;1%</td><td><span style="color:var(--josh)">Josh</span></td><td>Healthcare / Hospitality</td><td><span class="seniority-tag senior">New Cross-Vertical</span></td></tr>
+        <tr style="background:rgba(77,108,250,.06)"><td><strong>ZF Group (Brett)</strong></td><td>6 connections</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive T1</td><td><span class="seniority-tag vp">Hd Marketing + Hd Strategy + Hd Pricing + BD Europe</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Stellantis (Brett)</strong></td><td>2 connections</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag director">Mktg Dir + Dir BD & Strategy EMEA</span></td></tr>
+        <tr><td><strong>Ferrari</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag director">Head of Marketing North Europe</span></td></tr>
+        <tr><td><strong>Comline Group</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive Aftermarket</td><td><span class="seniority-tag vp">VP Marketing & Comms</span></td></tr>
+        <tr><td><strong>Thyssenkrupp BILSTEIN</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive T1</td><td><span class="seniority-tag senior">Senior Manager</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Borg Automotive Group</strong></td><td>3 connections</td><td><span style="color:var(--morten)">Morten</span></td><td>Automotive Aftermarket</td><td><span class="seniority-tag vp">CFO + IT Dir + Head of Data</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Kongsberg Automotive</strong></td><td>1 connection</td><td><span style="color:var(--morten)">Morten</span></td><td>Automotive T1</td><td><span class="seniority-tag director">Sales Director</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Hengst Filtration / IFS Group</strong></td><td>2 connections</td><td><span style="color:var(--morten)">Morten</span></td><td>Automotive T1</td><td><span class="seniority-tag vp">MD + Head of Global KAM</span></td></tr>
+        <tr><td><strong>Fujifilm Biotechnologies</strong></td><td>1 connection</td><td><span style="color:var(--morten)">Morten</span></td><td>Life Sciences</td><td><span class="seniority-tag mid">Instrument Coordinator</span></td></tr>
+        <tr><td><strong>Curaley</strong></td><td>1 connection</td><td><span style="color:var(--morten)">Morten</span></td><td>ABM / MarTech</td><td><span class="seniority-tag vp">CEO</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Alliance Automotive Group</strong></td><td>2 connections</td><td><span style="color:var(--josh)">Josh</span></td><td>Automotive Aftermarket</td><td><span class="seniority-tag director">UK Head of Mktg + Mktg Manager</span></td></tr>
+        <tr><td><strong>Ferdinand Bilstein</strong></td><td>1 connection</td><td><span style="color:var(--josh)">Josh</span></td><td>Automotive Aftermarket</td><td><span class="seniority-tag manager">Sales Manager</span></td></tr>
+        <tr><td><strong>Standard Motor Products</strong></td><td>1 connection</td><td><span style="color:var(--josh)">Josh</span></td><td>Automotive Aftermarket</td><td><span class="seniority-tag director">Dir of Marketing Services</span></td></tr>
+        <tr><td><strong>SICK</strong></td><td>1 connection</td><td><span style="color:var(--josh)">Josh</span></td><td>Industrial Sensors</td><td><span class="seniority-tag director">Head of Marketing Excellence</span></td></tr>
+        <tr><td><strong>Endress+Hauser</strong></td><td>1 connection</td><td><span style="color:var(--josh)">Josh</span></td><td>Industrial Instrumentation</td><td><span class="seniority-tag senior">Marketing Leader</span></td></tr>
+        <tr><td><strong>Wacker Chemie</strong></td><td>1 connection</td><td><span style="color:var(--josh)">Josh</span></td><td>Chemicals</td><td><span class="seniority-tag senior">Senior Marketing Manager</span></td></tr>
+        <tr><td><strong>DuPont Tyvek</strong></td><td>1 connection</td><td><span style="color:var(--josh)">Josh</span></td><td>Industrial Materials</td><td><span class="seniority-tag manager">Marketing Manager EMEA</span></td></tr>
+        <tr><td><strong>David Lloyd Leisure</strong></td><td>1 connection</td><td><span style="color:var(--josh)">Josh</span></td><td>Leisure / Hospitality</td><td><span class="seniority-tag director">Head of Marketing Europe</span></td></tr>
+        <tr style="background:rgba(253,204,14,.04)"><td><strong>Ferdinand Bilstein</strong></td><td>3+1 connections</td><td><span style="color:var(--alan)">Alan</span> <span style="color:var(--josh)">Josh</span></td><td>Automotive Aftermarket</td><td><span class="seniority-tag director">Grp Cat Ops Dir + Sales Mgr + BD Mgr</span></td></tr>
+        <tr style="background:rgba(253,204,14,.04)"><td><strong>MAHLE</strong></td><td>2 connections</td><td><span style="color:var(--alan)">Alan</span></td><td>Automotive T1</td><td><span class="seniority-tag director">Engineering Dir + Regional Sales Mgr</span></td></tr>
+        <tr style="background:rgba(77,108,250,.06)"><td><strong>Mercedes-Benz</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag manager">Marketing & CRM Manager</span></td></tr>
+        <tr style="background:rgba(77,108,250,.06)"><td><strong>Harley-Davidson</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag director">Marketing Director EMEA</span></td></tr>
+        <tr style="background:rgba(77,108,250,.06)"><td><strong>Audi UK</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag senior">UK Marketing Leader</span></td></tr>
+        <tr style="background:rgba(77,108,250,.06)"><td><strong>Jaguar Land Rover</strong></td><td>2 connections</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag senior">Cost Mgmt + AI Ethics Expert</span></td></tr>
+        <tr style="background:rgba(77,108,250,.06)"><td><strong>Porsche Retail Group</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag director">Head of Marketing</span></td></tr>
+        <tr style="background:rgba(77,108,250,.06)"><td><strong>Volvo Construction</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Industrial / OEM</td><td><span class="seniority-tag vp">Global VP Purchasing</span></td></tr>
+        <tr style="background:rgba(26,255,213,.06)"><td><strong>Unilever</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>FMCG</td><td><span class="seniority-tag vp">Global Brand VP (Rexona/Sure)</span></td></tr>
+        <tr><td><strong>Atlas Copco UK</strong></td><td>1+1 connections</td><td><span style="color:var(--brett)">Brett</span> <span style="color:var(--morten)">Morten</span></td><td>Industrial</td><td><span class="seniority-tag vp">General Manager UK</span></td></tr>
+        <tr><td><strong>Renault Group</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive OEM</td><td><span class="seniority-tag director">Marketing Dir + Board Member</span></td></tr>
+        <tr><td><strong>Cox Automotive</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Automotive</td><td><span class="seniority-tag vp">Chief People Officer</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Donaldson</strong></td><td>3 connections</td><td><span style="color:var(--morten)">Morten</span></td><td>Industrial Filtration</td><td><span class="seniority-tag manager">Territory Mgr + Mktg Specialist + Terr Mgr Sr</span></td></tr>
+        <tr><td><strong>Elis UK</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Services</td><td><span class="seniority-tag vp">CEO</span></td></tr>
+        <tr><td><strong>Sofa Brands International</strong></td><td>1 connection</td><td><span style="color:var(--brett)">Brett</span></td><td>Consumer Brands</td><td><span class="seniority-tag vp">CEO</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SENIORITY BREAKDOWN -->
+  <div class="grid-2 fade-up delay-3">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:1rem">Connection Seniority (New Connections)</div>
+      <div class="chart-container small"><canvas id="networkSeniorityChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:1rem">Top Sectors Represented</div>
+      <div class="chart-container small"><canvas id="networkSectorChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ENGAGEMENT SIGNALS -->
+  <div class="card fade-up delay-4">
+    <div class="card-header">
+      <div class="card-title">Engagement Signals</div>
+      <div class="card-badge" style="background:rgba(26,255,213,.1);color:var(--teal)">Warm Leads</div>
+    </div>
+    <p class="section-subtitle">Companies and individuals showing multiple engagement touchpoints: connections, post reactions, profile views, or comments. These represent the warmest pipeline signals.</p>
+    <div class="signal-card"><div class="signal-dot hot"></div><div><div class="signal-name">🔥 ZF Group — STRONGEST SIGNAL</div><div class="signal-detail">2.07% of Brett's audience + 3.00% of Josh's audience + connected to 3 profiles. The "surrounding the account" strategy is working — ZF is now the most penetrated target account across the entire campaign.</div></div></div>
+    <div class="signal-card"><div class="signal-dot hot"></div><div><div class="signal-name">🔥 ESET / ESET UK (Alan)</div><div class="signal-detail">NEW: 1.59% + 1.10% of Alan's audience. Cybersecurity giant with €600M+ revenue. Two distinct entities engaging suggests organisational-level interest, not single-individual.</div></div></div>
+    <div class="signal-card"><div class="signal-dot hot"></div><div><div class="signal-name">🔥 IHG Hotels 2% + Premier Inn + Whitbread (Josh)</div><div class="signal-detail">IHG now at 2% of Josh's audience. Premier Inn and Whitbread both appearing. Hospitality at 10% of his demographics. Travel Arrangements at 4%. Josh's brand positioning is pulling an entire vertical that wasn't in the original brief — and it includes a live LAW pipeline opportunity (Premier Inn via Morten).</div></div></div>
+    <div class="signal-card"><div class="signal-dot hot"></div><div><div class="signal-name">🔥 ABB appearing in Josh's audience</div><div class="signal-detail">ABB — the company Morten flagged as a live opportunity via his former client Hanne Flyger — is now showing in Josh's company demographics. This is a direct cross-profile commercial signal: Morten introduced the opportunity, Josh's content is now reaching ABB decision-makers. The social selling flywheel is working.</div></div></div>
+    <div class="signal-card"><div class="signal-dot warm"></div><div><div class="signal-name">Deloitte Digital (Alan)</div><div class="signal-detail">NEW: Tier-1 consulting validation. When Deloitte Digital starts watching your content, you're in a different conversation. This is exactly the credibility signal Alan's "Strategic Provocateur" voice was designed to attract.</div></div></div>
+    <div class="signal-card"><div class="signal-dot warm"></div><div><div class="signal-name">Atlas Copco / Siemens / Novonesis (Morten)</div><div class="signal-detail">NEW: Three Nordic industrial heavyweights now appearing in Morten's demographics. His Apr 6 post ("The Waste Problem") drove 1,066 impressions and broke through to his existing network at scale.</div></div></div>
+    <div class="signal-card"><div class="signal-dot warm"></div><div><div class="signal-name">Gates Corporation</div><div class="signal-detail">Continues to appear in both Brett (&lt;1%) and Josh (1.61%) audience demographics. LAW case study client engaging with content from multiple LAW directors = warm pipeline reactivation signal.</div></div></div>
+    <div class="signal-card"><div class="signal-dot warm"></div><div><div class="signal-name">Michelle Wells (VP, Global Marketing)</div><div class="signal-detail">Alan connection Mar 23. Automotive Tech &amp; B2B specialism = ideal ICP match for Alan's voice.</div></div></div>
+    <div class="signal-card"><div class="signal-dot warm"></div><div><div class="signal-name">Elliot Cravitz (McKinsey &amp; Company)</div><div class="signal-detail">Global Design Director connected Mar 30. Consulting-tier validation of Alan's thought leadership.</div></div></div>
+  </div>
+</div>
+
+<!-- ========================== ALAN McCULLOCH ========================== -->
+<div class="panel" id="p-alan">
+  <div class="profile-banner alan fade-up">
+    <img src="data:image/jpeg;base64,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" class="profile-avatar alan" style="object-fit:cover" alt="AM">
+    <div class="profile-info">
+      <div class="profile-name">Alan McCulloch</div>
+      <div class="profile-role">The Strategic Provocateur | Managing Director</div>
+    </div>
+    <div class="profile-stats">
+      <div class="profile-stat"><div class="profile-stat-value" style="color:var(--alan)">8,392</div><div class="profile-stat-label">Impressions</div></div>
+      <div class="profile-stat"><div class="profile-stat-value">225</div><div class="profile-stat-label">Engagements</div></div>
+      <div class="profile-stat"><div class="profile-stat-value">+94</div><div class="profile-stat-label">Followers</div></div>
+      <div class="profile-stat"><div class="profile-stat-value" style="color:var(--teal)">2.68%</div><div class="profile-stat-label">Avg Eng Rate</div></div>
+    </div>
+  </div>
+
+  <div class="stats-row fade-up delay-1">
+    <div class="stat-card amber"><div class="stat-value">14</div><div class="stat-label">Posts Published</div><div class="stat-delta up">+2 new (May 27 Byron Sharp)</div></div>
+    <div class="stat-card blue"><div class="stat-value">3,704</div><div class="stat-label">Unique Members</div><div class="stat-delta up">+42% in 13 days</div></div>
+    <div class="stat-card teal"><div class="stat-value">842</div><div class="stat-label">Total Followers</div><div class="stat-delta up">+49 since launch</div></div>
+    <div class="stat-card purple"><div class="stat-value">69%</div><div class="stat-label">Senior+ Audience</div><div class="stat-delta up">Snr 26 + Dir 21 + CXO 10 + VP 7</div></div>
+    <div class="stat-card green"><div class="stat-value">15</div><div class="stat-label">New Connections</div><div class="stat-delta up">Since Mar 16</div></div>
+  </div>
+
+  <div class="grid-2 fade-up delay-2">
+    <!-- POST PERFORMANCE -->
+    <div class="card">
+      <div class="card-header"><div class="card-title">Post Performance</div></div>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Post</th><th>Impr</th><th>Eng</th><th>Rate</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Grading Their Own Homework (Mar 17)</td><td>1,364</td><td>51</td><td class="highlight">3.74%</td></tr>
+          <tr><td>2</td><td>Before the Internet Changed Everything (Apr 1)</td><td>605</td><td>15</td><td class="highlight">2.48%</td></tr>
+          <tr><td>3</td><td>The Credibility Gap (Mar 30)</td><td>565</td><td>17</td><td class="highlight">3.01%</td></tr>
+          <tr><td>4</td><td>Post 8 (Apr 29)</td><td>523</td><td>16</td><td class="highlight">3.06%</td></tr>
+          <tr><td>5</td><td>The CMO's Impossible Position (Mar 23)</td><td>521</td><td>9</td><td>1.73%</td></tr>
+          <tr><td>6</td><td>Post 11 (May 18)</td><td>441</td><td>-</td><td class="highlight">New</td></tr>
+          <tr><td>7</td><td>The Mediocrity Problem (Mar 20)</td><td>417</td><td>15</td><td class="highlight">3.60%</td></tr>
+          <tr><td>8</td><td>Post 10 (May 13)</td><td>408</td><td>9</td><td class="highlight">2.21%</td></tr>
+          <tr><td>9</td><td>Post 7 (Apr 2)</td><td>396</td><td>17</td><td class="highlight">4.29%</td></tr>
+          <tr><td>10</td><td>Post 9 (May 5)</td><td>394</td><td>14</td><td class="highlight">3.55%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- POV ANCHOR PERFORMANCE -->
+    <div class="card">
+      <div class="card-header"><div class="card-title">POV Anchor Performance</div></div>
+      <table class="data-table">
+        <thead><tr><th>Theme</th><th>Posts</th><th>Avg Rate</th><th>Rank</th></tr></thead>
+        <tbody>
+          <tr><td>Post 7 (latest)</td><td>1</td><td class="highlight">4.95%</td><td>1</td></tr>
+          <tr><td>Thinking Over Technology</td><td>1</td><td class="highlight">4.41%</td><td>2</td></tr>
+          <tr><td>Measurement Accountability</td><td>1</td><td class="highlight">3.75%</td><td>3</td></tr>
+          <tr><td>Innovation vs Mediocrity</td><td>1</td><td class="highlight">3.64%</td><td>4</td></tr>
+          <tr><td>Agency Credibility Gap</td><td>1</td><td class="highlight">3.13%</td><td>5</td></tr>
+          <tr><td>Before the Internet Changed Everything</td><td>1</td><td class="highlight">2.35%</td><td>6</td></tr>
+          <tr><td>CMO Under Pressure</td><td>1</td><td>1.76%</td><td>7</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NEW CONNECTIONS TABLE -->
+  <div class="card fade-up delay-3">
+    <div class="card-header">
+      <div class="card-title">New Connections Since Campaign Launch</div>
+      <div class="card-badge" style="background:rgba(253,204,14,.1);color:var(--alan)">24 New</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Date</th><th>Seniority</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(253,204,14,.04)"><td><strong>Cristobal Montero Bautista</strong></td><td>Group Category Operations Director</td><td><span class="company-tag">Ferdinand Bilstein</span></td><td>May 14</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(253,204,14,.04)"><td><strong>Ian Dore</strong></td><td>Regional Sales Manager, Automotive Aftermarket</td><td><span class="company-tag">MAHLE</span></td><td>May 13</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr style="background:rgba(253,204,14,.04)"><td><strong>Lars Parchow</strong></td><td>Sales Manager</td><td><span class="company-tag">Ferdinand Bilstein</span></td><td>May 13</td><td><span class="seniority-tag manager">Also Josh</span></td></tr>
+        <tr style="background:rgba(253,204,14,.04)"><td><strong>Dan Bosworth</strong></td><td>CISO & Head of IT Platforms & Operations</td><td>-</td><td>May 13</td><td><span class="seniority-tag vp">CISO</span></td></tr>
+        <tr style="background:rgba(253,204,14,.04)"><td><strong>Mike Bassett</strong></td><td>Engineering Director</td><td><span class="company-tag">MAHLE Powertrain</span></td><td>May 13</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(253,204,14,.04)"><td><strong>Giedrius Matulevicius</strong></td><td>BD Manager, Baltic States</td><td><span class="company-tag">Ferdinand Bilstein</span></td><td>May 13</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>Peter Kornberg</strong></td><td>CXO / CDO, Digital Transformation & CX Executive</td><td>-</td><td>Apr 5</td><td><span class="seniority-tag vp">CXO</span></td></tr>
+        <tr><td><strong>Simon Mills</strong></td><td>Strategic, Commercial, Senior Agency</td><td>-</td><td>Apr 5</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Charlotte Genco</strong></td><td>Head of Social</td><td><span class="company-tag">LAW B2B</span></td><td>Apr 3</td><td><span class="seniority-tag mid">Internal</span></td></tr>
+        <tr><td><strong>Chris Maundrell</strong></td><td>Tech Marketer, Demand & Revenue</td><td>-</td><td>Mar 30</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Elliot Cravitz</strong></td><td>Global Design Director</td><td><span class="company-tag">McKinsey & Company</span></td><td>Mar 30</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr><td><strong>Michelle Wells</strong></td><td>VP, Global Marketing, Automotive Tech & B2B</td><td>-</td><td>Mar 23</td><td><span class="seniority-tag vp">VP</span></td></tr>
+        <tr><td><strong>Jim Chaudry</strong></td><td>Director of Automotive</td><td><span class="company-tag">Hearst UK</span></td><td>Mar 19</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr><td><strong>Craig Douglas</strong></td><td>Client Solutions Manager, Automotive & CPG</td><td><span class="company-tag">Meta</span></td><td>Mar 17</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>John Hiney</strong></td><td>Global Solutions, Automotive Vertical Lead</td><td>-</td><td>Mar 17</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Megan Lampinen</strong></td><td>Automotive Writer</td><td><span class="company-tag">Automotive World</span></td><td>Mar 17</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CONTENT QUEUE -->
+  <div class="card fade-up delay-4">
+    <div class="card-header"><div class="card-title">Content Queue</div></div>
+    <div class="queue-item"><div class="queue-num live">1</div><div><div class="queue-title">Grading Their Own Homework</div><div class="queue-pov">Measurement Accountability (NEW)</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">2</div><div><div class="queue-title">The Mediocrity Problem</div><div class="queue-pov">Innovation vs Mediocrity</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">3</div><div><div class="queue-title">The CMO's Impossible Position</div><div class="queue-pov">CMO Under Pressure</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">4</div><div><div class="queue-title">Better Thinking, Not More Technology</div><div class="queue-pov">Thinking Over Technology</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">5</div><div><div class="queue-title">The Credibility Gap</div><div class="queue-pov">Agency Promise vs Delivery</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num">6</div><div><div class="queue-title">Before the Internet Changed Everything</div><div class="queue-pov">Measurement Accountability (Part 2)</div></div><div class="queue-status scheduled">Next</div></div>
+  </div>
+</div>
+
+<!-- ========================== BRETT SAMMELS ========================== -->
+<div class="panel" id="p-brett">
+  <div class="profile-banner brett fade-up">
+    <img src="data:image/jpeg;base64,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" class="profile-avatar brett" style="object-fit:cover" alt="BS">
+    <div class="profile-info">
+      <div class="profile-name">Brett Sammels</div>
+      <div class="profile-role">The Outcome Engineer | Director</div>
+    </div>
+    <div class="profile-stats">
+      <div class="profile-stat"><div class="profile-stat-value" style="color:var(--brett)">11,262</div><div class="profile-stat-label">Impressions</div></div>
+      <div class="profile-stat"><div class="profile-stat-value">232</div><div class="profile-stat-label">Engagements</div></div>
+      <div class="profile-stat"><div class="profile-stat-value">+121</div><div class="profile-stat-label">Followers</div></div>
+      <div class="profile-stat"><div class="profile-stat-value" style="color:var(--teal)">2.06%</div><div class="profile-stat-label">Avg Eng Rate</div></div>
+    </div>
+  </div>
+
+  <div class="stats-row fade-up delay-1">
+    <div class="stat-card blue"><div class="stat-value">12</div><div class="stat-label">Posts Published</div><div class="stat-delta up">+2 new (May 27, Jun 1)</div></div>
+    <div class="stat-card teal"><div class="stat-value">4,883</div><div class="stat-label">Unique Members</div></div>
+    <div class="stat-card amber"><div class="stat-value">2,003</div><div class="stat-label">Total Followers</div><div class="stat-delta up">+121 since launch</div></div>
+    <div class="stat-card purple"><div class="stat-value">60.1%</div><div class="stat-label">Senior+ Audience</div></div>
+    <div class="stat-card green"><div class="stat-value">2.37%</div><div class="stat-label">ZF Group Reach</div><div class="stat-delta up">Top company sustained</div></div>
+  </div>
+
+  <div class="grid-2 fade-up delay-2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">Post Performance</div></div>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Post</th><th>Impr</th><th>Eng</th><th>Rate</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>The Question Your Board Is Already Asking (Mar 16)</td><td>2,868</td><td>40</td><td>1.39%</td></tr>
+          <tr><td>2</td><td>The Accountability Test (Mar 20)</td><td>2,593</td><td>31</td><td>1.20%</td></tr>
+          <tr><td>3</td><td>The Superpower Nobody Talks About (Mar 24)</td><td>802</td><td>23</td><td class="highlight">2.87%</td></tr>
+          <tr><td>4</td><td>Post 7 (May 8)</td><td>746</td><td>26</td><td class="highlight">3.49%</td></tr>
+          <tr><td>5</td><td>What Keeps Them Up at Night (Apr 10)</td><td>702</td><td>18</td><td class="highlight">2.56%</td></tr>
+          <tr><td>6</td><td>Brand Is a Commercial Asset (Apr 9)</td><td>689</td><td>27</td><td class="highlight">3.92%</td></tr>
+          <tr><td>7</td><td>The Boardroom Language Gap (Mar 31)</td><td>626</td><td>18</td><td class="highlight">2.88%</td></tr>
+          <tr><td>8</td><td>Post 8 (May 12)</td><td>471</td><td>18</td><td class="highlight">3.82%</td></tr>
+          <tr><td>9</td><td>Post 9 (May 13)</td><td>437</td><td>6</td><td>1.37%</td></tr>
+          <tr><td>10</td><td>Post 10 (May 15)</td><td>353</td><td>12</td><td class="highlight">3.40%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Audience: Top Companies</div></div>
+      <table class="data-table">
+        <thead><tr><th>Company</th><th>% of Audience</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ZF Group</strong></td><td class="highlight">2.07%</td><td><span class="seniority-tag vp">Case Study Client</span></td></tr>
+          <tr><td>LAW B2B</td><td>1.09%</td><td><span class="seniority-tag director">Internal</span></td></tr>
+          <tr><td>Gates Corporation</td><td>&lt;1%</td><td><span class="seniority-tag vp">Case Study Client</span></td></tr>
+          <tr><td>Whitbread</td><td>&lt;1%</td><td><span class="seniority-tag senior">Hospitality</span></td></tr>
+          <tr><td>Radish</td><td>&lt;1%</td><td><span class="seniority-tag mid">New</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card fade-up delay-3">
+    <div class="card-header">
+      <div class="card-title">New Connections Since Campaign Launch</div>
+      <div class="card-badge" style="background:rgba(77,108,250,.1);color:var(--brett)">72 New</div>
+    </div>
+    <div style="background:rgba(77,108,250,.05);border:1px solid rgba(77,108,250,.15);border-radius:8px;padding:.85rem;margin-bottom:1rem">
+      <div style="font-weight:600;font-size:.85rem;margin-bottom:.3rem;color:var(--accent)">ZF Group Cluster - 6 Connections (Account Penetration)</div>
+      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.5">Mark Hallam (Head of Marketing) + Martin Schmidt (Head of Strategy & Sustainability, Aftermarket) + Gosia Davies (Head of Portfolio Pricing) + Mark Bowen (BD for Europe) + Simone Dietz (Portfolio Strategy Governance, Aftermarket) + Svenja Karl (Communications Manager). Combined with ZF at 2.39% of Brett's audience demographics, this is the deepest single-account penetration on the campaign.</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Date</th><th>Seniority</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Carly Kouvaris</strong></td><td>Business Development Manager</td><td><span class="company-tag">Cannes Lions</span></td><td>May 18</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>Robin Das</strong></td><td>Founder, Brandintelle</td><td><span class="company-tag">Brandintelle</span></td><td>May 18</td><td><span class="seniority-tag senior">Founder</span></td></tr>
+        <tr><td><strong>James Millett</strong></td><td>Commercial, Digital & Marketing Leader</td><td>-</td><td>May 13</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Tom Sebok</strong></td><td>Managing Partner, Growth Strategy</td><td><span class="company-tag">New England Consulting</span></td><td>May 13</td><td><span class="seniority-tag vp">Partner</span></td></tr>
+        <tr><td><strong>Nathan Harrington</strong></td><td>Head of Brand</td><td><span class="company-tag">Aldermore</span></td><td>May 11</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr><td><strong>Viola De Girolami</strong></td><td>Former Marketing Director</td><td>Ex-Warner Bros & McDonald's</td><td>May 7</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(77,108,250,.04)"><td><strong>Svenja Karl</strong></td><td>Communications Manager</td><td><span class="company-tag">ZF Group</span></td><td>May 1</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>Andrew Stewart</strong></td><td>Automotive Microcontrollers & Processors</td><td>-</td><td>Apr 30</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Jo Emmerson</strong></td><td>VP of Marketing & Communications</td><td><span class="company-tag">Comline Group</span></td><td>Apr 29</td><td><span class="seniority-tag vp">VP</span></td></tr>
+        <tr><td><strong>Alessandra Cecco</strong></td><td>Global Marketing & Brand Positioning Executive</td><td>Energy / Tech / Industrial</td><td>Apr 29</td><td><span class="seniority-tag vp">Executive</span></td></tr>
+        <tr><td><strong>Maja D Foster</strong></td><td>Head of Marketing, B2B Strategy</td><td><span class="company-tag">NCMT</span></td><td>Apr 29</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr style="background:rgba(77,108,250,.04)"><td><strong>Simone Dietz</strong></td><td>Portfolio Strategy Governance Leader</td><td><span class="company-tag">ZF Aftermarket</span></td><td>Apr 29</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(77,108,250,.04)"><td><strong>Martin Schmidt</strong></td><td>Head of Strategy & Sustainability</td><td><span class="company-tag">ZF Aftermarket</span></td><td>Apr 29</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr style="background:rgba(77,108,250,.04)"><td><strong>Gosia Davies</strong></td><td>Head of Portfolio Pricing</td><td><span class="company-tag">ZF Group</span></td><td>Apr 29</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Jeremy Pang-Kessler</strong></td><td>Head of Marketing, North Europe</td><td><span class="company-tag">Ferrari</span></td><td>Apr 25</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr><td><strong>Nathan Martin</strong></td><td>Marketing Executive, Automotive Aftermarket</td><td><span class="company-tag">GSF Car Parts</span></td><td>Apr 22</td><td><span class="seniority-tag mid">Mid</span></td></tr>
+        <tr style="background:rgba(77,108,250,.04)"><td><strong>Mark Bowen</strong></td><td>Business Development for Europe</td><td><span class="company-tag">ZF Group</span></td><td>Apr 16</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(77,108,250,.04)"><td><strong>Mark Hallam</strong></td><td>Head of Marketing</td><td><span class="company-tag">ZF Group</span></td><td>Apr 15</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Alex Marshall</strong></td><td>Director - BD & Strategy EMEA</td><td><span class="company-tag">Stellantis</span></td><td>Apr 15</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr><td><strong>Natalia Guath</strong></td><td>Regional Marketing Manager UK, ROI, Scandinavia</td><td>-</td><td>Apr 14</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>Matthew Wrigley</strong></td><td>Chief Marketing Officer</td><td>-</td><td>Apr 9</td><td><span class="seniority-tag vp">CMO</span></td></tr>
+        <tr><td><strong>Brian McCroskey</strong></td><td>Senior Manager - Special Projects</td><td><span class="company-tag">Thyssenkrupp BILSTEIN NA</span></td><td>Mar 25</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Amrish Patel</strong></td><td>MD, Automotive Aftermarket, Parts Distribution</td><td><span class="company-tag">Motor Technics UK</span></td><td>Mar 24</td><td><span class="seniority-tag vp">MD</span></td></tr>
+        <tr><td><strong>Tom Ronz</strong></td><td>Head of Engineering, Automotive Aftermarket</td><td>-</td><td>Mar 23</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Paul Baynes</strong></td><td>European Marketing & Sales Manager</td><td><span class="company-tag">Ford Pro Special Vehicles</span></td><td>Mar 20</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Colin Start</strong></td><td>Marketing Director, Parts & Service UK</td><td><span class="company-tag">Stellantis</span></td><td>Mar 17</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr><td><strong>Peter Hayden</strong></td><td>General Manager, Aftermarket Sales & Marketing</td><td>-</td><td>Mar 17</td><td><span class="seniority-tag vp">GM</span></td></tr>
+        <tr><td><strong>Andreas Temmen</strong></td><td>Vice President Operations</td><td>-</td><td>Mar 17</td><td><span class="seniority-tag vp">VP</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Ian Boyle</strong></td><td>UK Aftermarket Sales & Marketing Director</td><td><span class="company-tag">Hella</span></td><td>Mar 16</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Holly Brailsford</strong></td><td>Marketing Manager, B2B Automotive</td><td><span class="company-tag">Frasle Mobility UK</span></td><td>Mar 16</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Mark Fereday</strong></td><td>Senior Trade Marketing Manager</td><td><span class="company-tag">Bridgestone</span></td><td>Mar 16</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Nathan Cooper</strong></td><td>Head of Product Marketing, SaaS</td><td><span class="company-tag">CitNOW Group</span></td><td>Mar 16</td><td><span class="seniority-tag director">Head of</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.72rem;color:var(--text-faint);margin-top:.5rem">Showing 32 of 72 new connections (key accounts and senior contacts highlighted). Full list includes additional marketing, automotive, and industrial professionals.</p>
+  </div>
+
+  <div class="card fade-up delay-4">
+    <div class="card-header"><div class="card-title">Content Queue</div></div>
+    <div class="queue-item"><div class="queue-num live">1</div><div><div class="queue-title">The Question Your Board Is Already Asking</div><div class="queue-pov">Activity vs Impact</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">2</div><div><div class="queue-title">The Accountability Test</div><div class="queue-pov">Commercial Return</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">3</div><div><div class="queue-title">The Superpower Nobody Talks About</div><div class="queue-pov">Creativity + Commerciality</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num">4</div><div><div class="queue-title">The Boardroom Language Gap</div><div class="queue-pov">Speaking Board Language</div></div><div class="queue-status scheduled">Next</div></div>
+    <div class="queue-item"><div class="queue-num">5</div><div><div class="queue-title">Brand Is a Commercial Asset</div><div class="queue-pov">Brand Through Commercial Lens</div></div><div class="queue-status draft">Queue</div></div>
+    <div class="queue-item"><div class="queue-num">6</div><div><div class="queue-title">What Keeps Them Up at Night</div><div class="queue-pov">Activity vs Impact (Empathy)</div></div><div class="queue-status draft">Queue</div></div>
+  </div>
+</div>
+
+<!-- ========================== JOSH KICHENSIDE ========================== -->
+<div class="panel" id="p-josh">
+  <div class="profile-banner josh fade-up">
+    <img src="data:image/jpeg;base64,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" class="profile-avatar josh" style="object-fit:cover" alt="JK">
+    <div class="profile-info">
+      <div class="profile-name">Josh Kichenside</div>
+      <div class="profile-role">The Brand Advocate | Director</div>
+    </div>
+    <div class="profile-stats">
+      <div class="profile-stat"><div class="profile-stat-value" style="color:var(--josh)">4,575</div><div class="profile-stat-label">Impressions</div></div>
+      <div class="profile-stat"><div class="profile-stat-value">123</div><div class="profile-stat-label">Engagements</div></div>
+      <div class="profile-stat"><div class="profile-stat-value">+69</div><div class="profile-stat-label">Followers</div></div>
+      <div class="profile-stat"><div class="profile-stat-value" style="color:var(--teal)">2.69%</div><div class="profile-stat-label">Avg Eng Rate</div></div>
+    </div>
+  </div>
+
+  <div class="stats-row fade-up delay-1">
+    <div class="stat-card green"><div class="stat-value">9</div><div class="stat-label">Posts Published</div><div class="stat-delta up">+2 new (May 26, Jun 1)</div></div>
+    <div class="stat-card blue"><div class="stat-value">2,184</div><div class="stat-label">Total Followers</div><div class="stat-delta up">+69 since launch</div></div>
+    <div class="stat-card amber"><div class="stat-value">69%</div><div class="stat-label">Senior+ Audience</div><div class="stat-delta up">Dir 28% + Snr 29%</div></div>
+    <div class="stat-card teal"><div class="stat-value">10%</div><div class="stat-label">Hospitality</div><div class="stat-delta up">IHG 2% + Premier Inn + Whitbread</div></div>
+    <div class="stat-card purple"><div class="stat-value">3%</div><div class="stat-label">ZF Group</div><div class="stat-delta up">Top company + ABB appearing</div></div>
+  </div>
+
+  <div class="grid-2 fade-up delay-2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">Post Performance</div></div>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Post</th><th>Impr</th><th>Eng</th><th>Rate</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Post 5 (Apr 27)</td><td>990</td><td>16</td><td>1.62%</td></tr>
+          <tr><td>2</td><td>Brand AND Growth. Not Brand OR Growth. (Mar 19)</td><td>983</td><td>30</td><td class="highlight">3.05%</td></tr>
+          <tr><td>3</td><td>The Most Undervalued Asset (Mar 24)</td><td>660</td><td>7</td><td>1.06%</td></tr>
+          <tr><td>4</td><td>The Brand Multiplier (Mar 18)</td><td>627</td><td>17</td><td class="highlight">2.71%</td></tr>
+          <tr><td>5</td><td>Custom Post (Personal Story, Mar 30)</td><td>591</td><td>30</td><td class="highlight">5.08%</td></tr>
+          <tr><td>6</td><td>Post 6 (May 15)</td><td>292</td><td>10</td><td class="highlight">3.42%</td></tr>
+          <tr><td>7</td><td>Post 7 (May 18)</td><td>111</td><td>1</td><td class="highlight">New</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Voice Adaptation</div>
+        <div class="card-badge" style="background:rgba(26,255,213,.1);color:var(--teal)">Positive Signal</div>
+      </div>
+      <p style="font-size:.85rem;color:var(--text-muted);line-height:1.6">Josh is back and publishing. Three new posts since Apr 27, with his Apr 27 post hitting 990 impressions. The audience response confirms the warm network was waiting: ZF Group now at 3%, Gates 2%, IHG Hotels 2%. Crucially, <strong style="color:var(--teal)">ABB and Premier Inn</strong> are now appearing in his company demographics — both are live LAW Creative pipeline opportunities introduced by Morten. The social selling programme is now generating measurable cross-profile commercial signals.</p>
+    </div>
+  </div>
+
+  <div class="card fade-up delay-3">
+    <div class="card-header">
+      <div class="card-title">New Connections Since Campaign Launch</div>
+      <div class="card-badge" style="background:rgba(26,255,213,.1);color:var(--josh)">41 New</div>
+    </div>
+    <div style="background:rgba(26,255,213,.05);border:1px solid rgba(26,255,213,.15);border-radius:8px;padding:.85rem;margin-bottom:1rem">
+      <div style="font-weight:600;font-size:.85rem;margin-bottom:.3rem;color:var(--teal)">Cross-Profile Overlap - Connections shared with Brett and/or Morten</div>
+      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.5">Ian Boyle (Hella) connected to both Josh and Brett. Brett Smyth (Hengst/IFS) connected to Josh, Brett, and Morten. Alliance Automotive Group has 2 connections (Curtis Armstrong + Adam McNaney). The automotive aftermarket network is now interlocking across LAW profiles.</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Date</th><th>Seniority</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Lars Parchow</strong></td><td>Sales Manager</td><td><span class="company-tag">Ferdinand Bilstein</span></td><td>May 6</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>Nadine Schleiser</strong></td><td>Divisional Director Global Sales Coordination</td><td>-</td><td>Apr 27</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr><td><strong>Poul Bastrup</strong></td><td>Head of Marketing, EMEA/Global, IT/Tech/Biotech, ABM</td><td>-</td><td>Apr 25</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr><td><strong>James Millett</strong></td><td>Commercial, Digital & Marketing Leader</td><td>-</td><td>Apr 25</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Feruza Bayramova</strong></td><td>Marketing Manager, EMEA</td><td><span class="company-tag">DuPont Tyvek</span></td><td>Apr 13</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>Esther Maraite, MBA</strong></td><td>Global & EMEA Marketing, Transformation & Strategy</td><td>-</td><td>Apr 13</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Katrin Arndt</strong></td><td>Head of Marketing Communications</td><td>-</td><td>Apr 1</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr><td><strong>Sarah Ward DipM FCIM</strong></td><td>Commercial Marketing Leader, Pipeline & Revenue Growth</td><td>-</td><td>Apr 1</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Kristina Rosenberger</strong></td><td>Head of Sales Marketing Innovation, Digitalization</td><td>-</td><td>Mar 31</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr><td><strong>Andreas Wagner</strong></td><td>Marketing Director DACH</td><td>-</td><td>Mar 30</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Ines Laufer</strong></td><td>Head of Marketing Excellence</td><td><span class="company-tag">SICK</span></td><td>Mar 30</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Brett Smyth</strong></td><td>Managing Director, IFS Group</td><td><span class="company-tag">Hengst Filtration</span></td><td>Mar 24</td><td><span class="seniority-tag vp">MD - Also Brett + Morten</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Aaron Shaffer</strong></td><td>Director of Marketing Services</td><td><span class="company-tag">Standard Motor Products</span></td><td>Mar 24</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr><td><strong>Daniel M Braxton</strong></td><td>Corporate Comms & Marketing, Life Sciences, IIoT</td><td>-</td><td>Mar 20</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Markus Ketterer</strong></td><td>Marketing Leader</td><td><span class="company-tag">Endress+Hauser</span></td><td>Mar 19</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Noud van Bavel</strong></td><td>Marketing Manager Europe, Industrial Group</td><td>-</td><td>Mar 19</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Lenine De Sousa Gomes</strong></td><td>Senior Marketing Manager</td><td><span class="company-tag">Wacker Chemie</span></td><td>Mar 18</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Ian Boyle</strong></td><td>UK Aftermarket Sales & Marketing Director</td><td><span class="company-tag">Hella</span></td><td>Mar 18</td><td><span class="seniority-tag director">Dir - Also Brett</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Curtis Armstrong</strong></td><td>Marketing Manager</td><td><span class="company-tag">Alliance Automotive Group</span></td><td>Mar 18</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Adam McNaney</strong></td><td>UK Group Head of Marketing</td><td><span class="company-tag">Alliance Automotive / NAPA Racing UK</span></td><td>Mar 18</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Detlef Kloke</strong></td><td>Sales & Marketing</td><td><span class="company-tag">PhoenixContact</span></td><td>Mar 18</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Jesse Pijpers</strong></td><td>Head of Marketing Europe</td><td><span class="company-tag">David Lloyd Leisure</span></td><td>Mar 17</td><td><span class="seniority-tag director">Head of</span></td></tr>
+        <tr><td><strong>Obinna Eluka</strong></td><td>Strategic Advisor @ LinkedIn, Founder</td><td><span class="company-tag">LinkedIn / Uzu Elo</span></td><td>Mar 16</td><td><span class="seniority-tag senior">Advisor</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.72rem;color:var(--text-faint);margin-top:.5rem">Showing 23 of 41 new connections (key accounts and senior contacts highlighted). Full list includes additional marketing, B2B, and industrial professionals.</p>
+  </div>
+
+  <div class="card fade-up delay-4">
+    <div class="card-header"><div class="card-title">Content Queue</div></div>
+    <div class="queue-item"><div class="queue-num live">1</div><div><div class="queue-title">The Brand Multiplier</div><div class="queue-pov">Brand = Easier AND More Impactful</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">2</div><div><div class="queue-title">Brand AND Growth. Not Brand OR Growth.</div><div class="queue-pov">Both, Not Either/Or</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">3</div><div><div class="queue-title">The Most Undervalued Asset</div><div class="queue-pov">Brand as Compounding Asset</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">4</div><div><div class="queue-title">Custom Post (Personal Story)</div><div class="queue-pov">Josh's own voice</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num">5</div><div><div class="queue-title">9 Years Isn't Loyalty. It's Proof.</div><div class="queue-pov">Proven Impact Over Time</div></div><div class="queue-status scheduled">Next</div></div>
+    <div class="queue-item"><div class="queue-num">6</div><div><div class="queue-title">What Award-Winning Actually Means</div><div class="queue-pov">Creative Excellence = Impact</div></div><div class="queue-status draft">Queue</div></div>
+  </div>
+</div>
+
+<!-- ========================== MORTEN KORNERUP ========================== -->
+<div class="panel" id="p-morten">
+  <div class="profile-banner morten fade-up">
+    <img src="data:image/jpeg;base64,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" class="profile-avatar morten" style="object-fit:cover" alt="MK">
+    <div class="profile-info">
+      <div class="profile-name">Morten Kornerup</div>
+      <div class="profile-role">The Commercial Realist | Head of ABM</div>
+    </div>
+    <div class="profile-stats">
+      <div class="profile-stat"><div class="profile-stat-value" style="color:var(--morten)">11,882</div><div class="profile-stat-label">Impressions</div></div>
+      <div class="profile-stat"><div class="profile-stat-value">365</div><div class="profile-stat-label">Engagements</div></div>
+      <div class="profile-stat"><div class="profile-stat-value">+94</div><div class="profile-stat-label">Followers</div></div>
+      <div class="profile-stat"><div class="profile-stat-value" style="color:var(--teal)">3.07%</div><div class="profile-stat-label">Avg Eng Rate</div></div>
+    </div>
+  </div>
+
+  <div class="stats-row fade-up delay-1">
+    <div class="stat-card purple"><div class="stat-value">14+</div><div class="stat-label">Posts Published</div><div class="stat-delta up">Most active profile</div></div>
+    <div class="stat-card blue"><div class="stat-value">5,195</div><div class="stat-label">Unique Members</div><div class="stat-delta up">+7% in 13 days</div></div>
+    <div class="stat-card teal"><div class="stat-value">3,845</div><div class="stat-label">Total Followers</div><div class="stat-delta up">+94 since launch</div></div>
+    <div class="stat-card amber"><div class="stat-value">3.07%</div><div class="stat-label">Avg Engagement Rate</div><div class="stat-delta up">Highest on the campaign</div></div>
+    <div class="stat-card green"><div class="stat-value">67%</div><div class="stat-label">Senior+ Audience</div><div class="stat-delta up">Snr 30 + Dir 16 + CXO 8 + VP 7</div></div>
+  </div>
+
+  <div class="grid-2 fade-up delay-2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">Post Performance</div></div>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Post</th><th>Impr</th><th>Eng</th><th>Rate</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Personal Story (Apr 19)</td><td>3,420</td><td>59</td><td>1.73%</td></tr>
+          <tr><td>2</td><td>The Waste Problem (Apr 6)</td><td>1,717</td><td>52</td><td class="highlight">3.03%</td></tr>
+          <tr><td>3</td><td>Lets Look at the Waste Problem (Apr 9)</td><td>884</td><td>34</td><td class="highlight">3.85%</td></tr>
+          <tr><td>4</td><td>Post (May 10)</td><td>783</td><td>14</td><td>1.79%</td></tr>
+          <tr><td>5</td><td>The Cost of Doing Nothing (Mar 31)</td><td>690</td><td>18</td><td class="highlight">2.61%</td></tr>
+          <tr><td>6</td><td>ABM Is Not a Campaign (Apr 2)</td><td>562</td><td>18</td><td class="highlight">3.20%</td></tr>
+          <tr><td>7</td><td>The Credibility Shortcut (Apr 10)</td><td>458</td><td>23</td><td class="highlight">5.02%</td></tr>
+          <tr><td>8</td><td>Performance AND Sustainability (Apr 14)</td><td>421</td><td>20</td><td class="highlight">4.75%</td></tr>
+          <tr><td>9</td><td>The Dream Customer Test (Mar 27)</td><td>369</td><td>11</td><td class="highlight">2.98%</td></tr>
+          <tr><td>10</td><td>Post (Apr 30)</td><td>300</td><td>10</td><td class="highlight">3.33%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Strategic Context</div></div>
+      <p style="font-size:.85rem;color:var(--text-muted);line-height:1.6">Morten's campaign was deliberately staggered. As the most active LinkedIn user on the team (3,783 followers), the other three profiles needed a head start to build momentum before Morten's existing audience entered the mix. His engagement rate is already the highest across the team at 3.58%, validating both the content quality and his existing network strength.</p>
+    </div>
+  </div>
+
+  <div class="card fade-up delay-3">
+    <div class="card-header">
+      <div class="card-title">New Connections Since Campaign Launch</div>
+      <div class="card-badge" style="background:rgba(156,106,252,.1);color:var(--morten)">40 New</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Date</th><th>Seniority</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Yvonne Seier Christensen</strong></td><td>Founder, Winemaker</td><td><span class="company-tag">Champagne Les Cinq Filles</span></td><td>May 15</td><td><span class="seniority-tag senior">Founder</span></td></tr>
+        <tr><td><strong>Alexandra Dessoy</strong></td><td>Viceborgmester, Frederiksberg</td><td>-</td><td>May 14</td><td><span class="seniority-tag director">Public Office</span></td></tr>
+        <tr><td><strong>Siew Kwan Chang</strong></td><td>Leadership & Authenticity</td><td>-</td><td>May 13</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Rachel Kador</strong></td><td>Creative Content, Pharma/Tech/Non-profit</td><td>-</td><td>May 13</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Claudius Schuhmacher</strong></td><td>Independent</td><td>-</td><td>May 11</td><td><span class="seniority-tag mid">Mid</span></td></tr>
+        <tr><td><strong>Conor Patten</strong></td><td>Multimedia Content Specialist</td><td>-</td><td>May 8</td><td><span class="seniority-tag mid">Mid</span></td></tr>
+        <tr><td><strong>Monica Bocher Christiansen</strong></td><td>Head of Group Data Management</td><td><span class="company-tag">BORG Automotive Group</span></td><td>May 4</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr><td><strong>Aina Miralda Calderon</strong></td><td>UX/UI Designer & Webflow</td><td>-</td><td>May 4</td><td><span class="seniority-tag mid">Mid</span></td></tr>
+        <tr><td><strong>Dr. Gabriela K. Michelon</strong></td><td>AI Program Manager, PhD</td><td>-</td><td>May 1</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(156,106,252,.04)"><td><strong>Jean-Sebastien Bignozzi</strong></td><td>General Manager, Business Dev, Automotive Aftermarket</td><td>-</td><td>Apr 30</td><td><span class="seniority-tag vp">GM / Director</span></td></tr>
+        <tr><td><strong>Alvin Mennie</strong></td><td>Senior Marketing Manager</td><td>-</td><td>Apr 30</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr style="background:rgba(156,106,252,.04)"><td><strong>Adrian Rothschild</strong></td><td>Global Automotive Aftermarket</td><td>-</td><td>Apr 30</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Lidiia Alaverdova</strong></td><td>B2B & B2B2C Marketing Leader</td><td>-</td><td>Apr 30</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Dr. Patrick Mattes</strong></td><td>VP Global Head of Business Unit Power & Energy</td><td>-</td><td>Apr 30</td><td><span class="seniority-tag vp">VP</span></td></tr>
+        <tr><td><strong>Krystian Poltrok</strong></td><td>Creative Ideas Orchestrator</td><td>-</td><td>Apr 30</td><td><span class="seniority-tag mid">Mid</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Soren Christensen</strong></td><td>IT Operation Director</td><td><span class="company-tag">Borg Automotive A/S</span></td><td>Apr 30</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Andrew Smith</strong></td><td>Sales Director</td><td><span class="company-tag">Kongsberg Automotive</span></td><td>Apr 30</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Brett Smyth</strong></td><td>Managing Director</td><td><span class="company-tag">IFS Group / Hengst Filtration</span></td><td>Apr 30</td><td><span class="seniority-tag vp">MD</span></td></tr>
+        <tr><td><strong>Anja Hendel</strong></td><td>Independent Technology Expert, Board Member</td><td>-</td><td>Apr 30</td><td><span class="seniority-tag senior">Board</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Jesper Brandt Pedersen</strong></td><td>CFO</td><td><span class="company-tag">Borg Automotive Group</span></td><td>Apr 30</td><td><span class="seniority-tag vp">CXO</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Alex Schoffmann</strong></td><td>Head of Global ITG & Key Account Management</td><td><span class="company-tag">Hengst</span></td><td>Apr 30</td><td><span class="seniority-tag director">Director</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>Henrik Dige Christensen</strong></td><td>CEO / CCO / CSO, SaaS, Technology, AI/HPC</td><td>-</td><td>Apr 29</td><td><span class="seniority-tag vp">CXO</span></td></tr>
+        <tr><td><strong>Jessica Hannaford</strong></td><td>Account Executive</td><td><span class="company-tag">LAW B2B</span></td><td>Apr 21</td><td><span class="seniority-tag mid">Internal</span></td></tr>
+        <tr><td><strong>Teny Ogunseye</strong></td><td>ABM, B2B Marketing & AI</td><td>-</td><td>Apr 20</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Gulcan K. Yilmaz</strong></td><td>Instrument Coordinator</td><td><span class="company-tag">Fujifilm Biotechnologies</span></td><td>Apr 19</td><td><span class="seniority-tag mid">Mid</span></td></tr>
+        <tr><td><strong>Wilhelm Frank</strong></td><td>Marketing Campaign Manager EMEA South-East</td><td>-</td><td>Apr 16</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>Natalia Zabozhenko</strong></td><td>EMEA Marketing & Comms Specialist</td><td>-</td><td>Apr 16</td><td><span class="seniority-tag mid">Mid</span></td></tr>
+        <tr><td><strong>Karan Dutta</strong></td><td>Account Manager, Enterprise Partnerships</td><td><span class="company-tag">System One</span></td><td>Apr 10</td><td><span class="seniority-tag manager">Manager</span></td></tr>
+        <tr><td><strong>Jennifer Coe</strong></td><td>Enterprise & ABM Marketing Leader, ITSMA Certified</td><td>-</td><td>Apr 10</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Jaskirat Singh (Robbie)</strong></td><td>B2B Growth, White Label Partnerships</td><td>-</td><td>Apr 9</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Thomas Debusmann</strong></td><td>Data Driven Business Decisions, IT</td><td>-</td><td>Apr 9</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Deanna Shemshedini</strong></td><td>Revenue Growth, ABM, Segmentation, Demand Gen</td><td>-</td><td>Apr 8</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Sushmita Rajkhowa, PMP</strong></td><td>AI & Digital Transformation, MarTech</td><td>-</td><td>Apr 8</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Claus Omand</strong></td><td>Digital Strategy, Marketing & Execution</td><td>-</td><td>Apr 7</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr style="background:rgba(26,255,213,.04)"><td><strong>George Papaioannou</strong></td><td>GTM & Growth Marketing, $20M+ Revenue Impact</td><td>Ex-Google & Vonage</td><td>Apr 6</td><td><span class="seniority-tag vp">Senior Leader</span></td></tr>
+        <tr><td><strong>Christian Ulrich</strong></td><td>Senior Commercial Leader, GTM & Revenue Growth</td><td>-</td><td>Apr 4</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+        <tr><td><strong>Mike Chapman</strong></td><td>CEO, ABM & Channel Enablement</td><td><span class="company-tag">Curaley</span></td><td>Mar 31</td><td><span class="seniority-tag vp">CEO</span></td></tr>
+        <tr><td><strong>Simon B. Christensen</strong></td><td>Marketing, Google Ads, Design</td><td><span class="company-tag">W360 Marketing</span></td><td>Mar 26</td><td><span class="seniority-tag mid">Mid</span></td></tr>
+        <tr><td><strong>Freja Brandhoj</strong></td><td>Folketingsmedlem (MP)</td><td><span class="company-tag">Liberal Alliance</span></td><td>Mar 25</td><td><span class="seniority-tag vp">Public Office</span></td></tr>
+        <tr><td><strong>Stefan Repin</strong></td><td>AI-Native GTM, Demand Gen & ABM, B2B SaaS</td><td>-</td><td>Mar 19</td><td><span class="seniority-tag senior">Senior</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card fade-up delay-4">
+    <div class="card-header"><div class="card-title">Content Queue</div></div>
+    <div class="queue-item"><div class="queue-num live">1</div><div><div class="queue-title">The Dream Customer Test</div><div class="queue-pov">Targeted Marketing</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num live">2</div><div><div class="queue-title">The Cost of Doing Nothing</div><div class="queue-pov">Committee Indecision</div></div><div class="queue-status published">Published</div></div>
+    <div class="queue-item"><div class="queue-num">3</div><div><div class="queue-title">ABM Is Not a Campaign</div><div class="queue-pov">ABM as Operating System</div></div><div class="queue-status scheduled">Next</div></div>
+    <div class="queue-item"><div class="queue-num">4</div><div><div class="queue-title">The Waste Problem</div><div class="queue-pov">Targeted vs Untargeted</div></div><div class="queue-status draft">Queue</div></div>
+    <div class="queue-item"><div class="queue-num">5</div><div><div class="queue-title">The Credibility Shortcut</div><div class="queue-pov">Proof Points</div></div><div class="queue-status draft">Queue</div></div>
+    <div class="queue-item"><div class="queue-num">6</div><div><div class="queue-title">Performance AND Sustainability</div><div class="queue-pov">ABM Dual Value</div></div><div class="queue-status draft">Queue</div></div>
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="brand">LAW Creative x WeMarket.Events</div>
+  <a href="mailto:eric@wemarket.events">eric@wemarket.events</a> | <a href="https://lawb2b.com">lawb2b.com</a><br>
+  Confidential | Updated 1 June 2026
+</div>
+
+<script>
+// TAB SWITCHING
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.tab[data-tab="${name}"]`).classList.add('active');
+  document.getElementById(`p-${name}`).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>switchTab(t.dataset.tab));
+});
+
+// CHARTS
+const chartFont={family:"'Plus Jakarta Sans',sans-serif"};
+Chart.defaults.color='#8c99b0';
+Chart.defaults.font.family=chartFont.family;
+Chart.defaults.font.size=11;
+
+// Benchmark Chart
+new Chart(document.getElementById('benchmarkChart'),{
+  type:'bar',
+  data:{
+    labels:['Brett','Alan','Josh','Morten','B2B Benchmark'],
+    datasets:[{
+      data:[2.06,2.68,2.69,3.07,1.0],
+      backgroundColor:['#4D6CFA','#fdcc0e','#1AFFD5','#9C6AFC','#2a3550'],
+      borderRadius:6,borderSkipped:false
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      y:{grid:{color:'#1a2235'},ticks:{callback:v=>v+'%'}},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// Impressions Chart
+new Chart(document.getElementById('impressionsChart'),{
+  type:'doughnut',
+  data:{
+    labels:['Brett','Alan','Josh','Morten'],
+    datasets:[{
+      data:[11262,8392,4575,11882],
+      backgroundColor:['#4D6CFA','#fdcc0e','#1AFFD5','#9C6AFC'],
+      borderWidth:0,hoverOffset:8
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    cutout:'65%',
+    plugins:{legend:{position:'right',labels:{padding:12,usePointStyle:true,pointStyle:'circle'}}}
+  }
+});
+
+// Network Seniority Chart
+new Chart(document.getElementById('networkSeniorityChart'),{
+  type:'doughnut',
+  data:{
+    labels:['VP/C-Suite','Director','Senior','Manager','Mid-Level','Junior'],
+    datasets:[{
+      data:[8,12,22,14,16,6],
+      backgroundColor:['#1AFFD5','#4D6CFA','#9C6AFC','#fdcc0e','#5a6680','#2a3550'],
+      borderWidth:0
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    cutout:'60%',
+    plugins:{legend:{position:'right',labels:{padding:10,usePointStyle:true,pointStyle:'circle',font:{size:11}}}}
+  }
+});
+
+// Network Sector Chart
+new Chart(document.getElementById('networkSectorChart'),{
+  type:'bar',
+  data:{
+    labels:['Advertising/Marketing','Automotive','Hospitality','IT/Tech','Consulting','Cybersecurity','Industrial Mfg','Media'],
+    datasets:[{
+      data:[24,12,10,9,7,3,5,4],
+      backgroundColor:'#4D6CFA',borderRadius:4,borderSkipped:false
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{grid:{color:'#1a2235'},ticks:{callback:v=>v+'%'}},
+      y:{grid:{display:false}}
+    }
+  }
+});
+</script>
+</body>
+</html>
